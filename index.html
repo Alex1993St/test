@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    Строку поиска: <input type="search" name="search" id="search">
+    Скрывать строки, в которых не найдены соответствия: <input type="checkbox" name="search" value="search" id="checked">
+    <table>
+        <tr>
+            <td>1</td><td>q</td><td>2</td><td>w</td><td>3</td><td>e</td><td>4</td><td>r</td><td>5</td><td>t</td>
+        </tr>
+        <tr>
+            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+        </tr>
+        <tr>
+            <td>q</td><td>w</td><td>e</td><td>r</td><td>t</td><td>y</td><td>qw</td><td>we</td><td>er</td><td>rt</td>
+        </tr>
+        <tr>
+            <td>ty</td><td>qwe</td><td>wer</td><td>ert</td><td>rty</td><td>qwer</td><td>wert</td><td>erty</td><td>qwert</td><td>werty</td>
+        </tr>
+        <tr>
+            <td>qwerty</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
+        </tr>
+        <tr>
+            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+        </tr>
+        <tr>
+            <td>q</td><td>w</td><td>e</td><td>r</td><td>t</td><td>y</td><td>qw</td><td>we</td><td>er</td><td>rt</td>
+        </tr>
+        <tr>
+            <td>ty</td><td>qwe</td><td>wer</td><td>ert</td><td>rty</td><td>qwer</td><td>wert</td><td>erty</td><td>qwert</td><td>werty</td>
+        </tr>
+        <tr>
+            <td>qwerty</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
+        </tr>
+        <tr>
+            <td>1</td><td>q</td><td>2</td><td>w</td><td>3</td><td>e</td><td>4</td><td>r</td><td>5</td><td>t</td>
+        </tr>
+    </table>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $('#search').on('input', function (e) {
+       var search = e.target.value;
+            var color = search ? "blue" : "white";
+            $("td").filter(function () {
+                return search ? $(this).html() == search : $(this).html();
+            }).css("background-color", color);
+    })
+
+    $('#checked').on('click', function (e) {
+        var search = $('#search').val();
+        if ( e.target.checked ) {
+             $("td").filter(function () {
+                 return $(this).html() != search ;
+             }).hide();
+        } else {
+            $("td").filter(function () {
+                return $(this).html();
+            }).show();
+        }
+    })
+</script>
+</body>
+</html>
