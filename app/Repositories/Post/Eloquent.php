@@ -3,8 +3,8 @@
 namespace App\Repositories\Post;
 
 use App\Models\Post;
-use App\Models\PostTranslation;
 use App\Repositories\Language\LanguageRepository;
+use App\Repositories\PostTranslation\PostTranslationRepository;
 
 class Eloquent implements PostRepository
 {
@@ -31,15 +31,12 @@ class Eloquent implements PostRepository
             : app(LanguageRepository::class)->getLanguage()->id;
 
         if (isset($attributes['post_id']) && $attributes['post_id']) {
-            $modelPostTranslation = PostTranslation::where([
-                'language_id' => $language,
-                'post_id' => $attributes['post_id'],
-            ])->first();
+            $modelPostTranslation = app(PostTranslationRepository::class)->getByIdAndLang($language, $attributes['post_id']);
 
             if ($modelPostTranslation) {
                 return $modelPostTranslation;
             } else {
-                $model = Post::find($attributes['post_id']);
+                $model = $this->model::find($attributes['post_id']);
             }
         } else {
             $model = clone $this->model;
