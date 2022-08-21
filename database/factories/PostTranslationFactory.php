@@ -28,7 +28,7 @@ class PostTranslationFactory extends Factory
     {
         $model = Language::first();
 
-        if ($model) {
+        if (!$model) {
             $model = Language::factory()->create();
         }
 
