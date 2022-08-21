@@ -15,5 +15,11 @@
             <option value="{{ $tag->id }}">{{ $tag->name }}</option>
         @endforeach
     </select>
+    <select name="post_id">
+        <option></option>
+        @foreach($posts as $post)
+            <option value="{{ $post->id }}">{{ $post->id }}</option>
+        @endforeach
+    </select>
     <input type="submit" value="Create">
 </form>

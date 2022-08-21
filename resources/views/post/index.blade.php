@@ -18,8 +18,8 @@
                     <input type="hidden" name="id" value="{{$post->id}}">
                     <input type="submit" value="DELETE">
                 </form>
-                <hr/>
             @endif
+            <hr/>
         @endforeach
         {{ $posts->links() }}
     </div>

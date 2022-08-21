@@ -29,6 +29,7 @@ class StorePostRequest extends FormRequest
             'content' => 'required',
             'language_id' => 'nullable',
             'tags_id' => 'nullable',
+            'post_id' => 'nullable',
         ];
     }
 }

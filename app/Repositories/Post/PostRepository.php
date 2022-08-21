@@ -13,4 +13,6 @@ interface PostRepository
     public function destroy($id);
 
     public function getData($post);
+
+    public function list();
 }

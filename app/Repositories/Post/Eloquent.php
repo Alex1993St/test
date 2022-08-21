@@ -3,6 +3,7 @@
 namespace App\Repositories\Post;
 
 use App\Models\Post;
+use App\Models\PostTranslation;
 use App\Repositories\Language\LanguageRepository;
 
 class Eloquent implements PostRepository
@@ -29,8 +30,21 @@ class Eloquent implements PostRepository
             ? $attributes['language_id']
             : app(LanguageRepository::class)->getLanguage()->id;
 
-        $model = clone $this->model;
-        $model->save();
+        if (isset($attributes['post_id']) && $attributes['post_id']) {
+            $modelPostTranslation = PostTranslation::where([
+                'language_id' => $language,
+                'post_id' => $attributes['post_id'],
+            ])->first();
+
+            if ($modelPostTranslation) {
+                return $modelPostTranslation;
+            } else {
+                $model = Post::find($attributes['post_id']);
+            }
+        } else {
+            $model = clone $this->model;
+            $model->save();
+        }
 
         if (isset($attributes['tags_id']) && $attributes['tags_id']) {
             $model->tags()->attach($attributes['tags_id']);
@@ -82,5 +96,10 @@ class Eloquent implements PostRepository
             'post' => $post,
             'translation' => $translation,
         ]);
+    }
+
+    public function list()
+    {
+        return $this->model->get();
     }
 }

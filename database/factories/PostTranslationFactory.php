@@ -14,14 +14,9 @@ class PostTranslationFactory extends Factory
             'title' => fake()->name(),
             'description' => fake()->text(),
             'content' => fake()->text(),
-            'post_id' => $this->getPost(),
+            'post_id' => Post::create()->id,
             'language_id' => $this->getLang()
         ];
-    }
-
-    private function getPost()
-    {
-        return Post::first()->id;
     }
 
     private function getLang()

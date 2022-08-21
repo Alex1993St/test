@@ -28,7 +28,7 @@ class PostController extends Controller
 
     public function create(TagRepository $tag, LanguageRepository $language)
     {
-        $posts = $this->model->get();
+        $posts = $this->model->list();
         $tags = $tag->getItem();
         $languages = $language->get();
 
