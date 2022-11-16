@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LotController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -23,4 +25,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::resource('/post', PostController::class)->except('show');
 });
 
+Route::resource('/lot', LotController::class);
+Route::resource('/category', CategoryController::class);
 Route::resource('/tag', TagController::class)->except('show');
