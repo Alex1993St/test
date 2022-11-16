@@ -2,14 +2,16 @@
 <div>
     <a href="{{ route('lot.create') }}">Create</a>
     <div>
-        <form>
-            <select name="categories[]" multiple>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            <input type="submit" value="Filter">
-        </form>
+        @if(!$categories->isEmpty())
+            <form>
+                <select name="categories[]" multiple>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <input type="submit" value="Filter">
+            </form>
+        @endif
         @foreach($lots as $lot)
             <p>{{ $lot->name }}</p>
             <p>{{ $lot->description }}</p>
